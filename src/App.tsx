@@ -91,7 +91,7 @@ function App() {
           <li className={current == 4 ? "list active" : "list"} onClick={() => setCurrent(4)}>
             <div>
               <span className="icon">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80" width="25" height="25">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80" width="25" height="25" style={{marginRight: "1px", marginBottom: "2px"}}>
                   <path d={svg} fill="white"/>
                 </svg>
               </span>

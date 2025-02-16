@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react';
+import Gallery from './Gallery.tsx';
 import './App.css';
 
-function App() {
+const App: React.FC = () => {
   const [string, setString] = useState<string>("");
   const [svg, setSvg] = useState<string>("");
   const [current, setCurrent] = useState<number>(0);
@@ -102,6 +103,8 @@ function App() {
           <div className="indicator"></div>
         </ul>
       </div>
+
+      <Gallery current={current}/>
     </>
   )
 }

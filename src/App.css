@@ -7,6 +7,7 @@
   font-size: 25px;
   font-weight: 400;
   font-style: normal;
+  color: white;
 }
 
 body {
@@ -19,6 +20,8 @@ body {
 
 .nav {
   position: relative;
+  left: 50%;
+  transform: translateX(-50%);
   width: 600px;
   height: 70px;
   background: linear-gradient(45deg, #0e9be4, #3d7a52);
@@ -26,6 +29,7 @@ body {
   justify-content: center;
   align-items: center;
   border-radius: 10px;
+  margin-bottom: 20px;
 }
 
 .nav ul {
@@ -68,7 +72,6 @@ body {
 
 .nav ul li div .text {
   position: absolute;
-  color: white;
   transform: translateY(20px);
   transition: .5s;
   opacity: 0;
@@ -90,7 +93,7 @@ body {
 
 .nav ul li.active div .circle {
   transition: .5s;
-  transition-delay: .5s;
+  transition-delay: .3s;
   transform: translateY(-35px) scale(1);
 }
 

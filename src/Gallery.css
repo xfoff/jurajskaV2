@@ -1,0 +1,38 @@
+:root {
+  --width: 1000px;
+  --height: 600px;
+  --columns: 6;
+  --rows: 6;
+  --gap: 7px;
+}
+
+.gallery {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background: linear-gradient(45deg, #0e9be4, #3d7a52);
+  border-radius: 10px;
+  padding: 15px;
+}
+
+.images {
+  display: grid;
+  grid-template-columns: repeat(var(--columns), 1fr);
+  grid-template-rows: repeat(var(--rows), 1fr);
+  gap: var(--gap);
+  width: var(--width);
+  height: var(--height);
+  height: calc(100% + .7px);
+  padding-bottom: 10px;
+}
+
+.image {
+  width: calc(var(--width) / var(--columns) - var(--gap) + .7px);
+  height: calc(var(--height) / var(--rows) - var(--gap) + .7px);
+  background: #090a16;
+  border-radius: 10px;
+  box-sizing: border-box;
+  border: 2px solid white;
+  cursor: pointer;
+}

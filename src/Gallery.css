@@ -13,7 +13,7 @@
   flex-direction: column;
   background: linear-gradient(45deg, #0e9be4, #3d7a52);
   border-radius: 10px;
-  padding: 15px;
+  padding: 15px 15px 0px 15px;
 }
 
 .images {
@@ -24,7 +24,6 @@
   width: var(--width);
   height: var(--height);
   height: calc(100% + .7px);
-  padding-bottom: 10px;
 }
 
 .image {
@@ -35,4 +34,55 @@
   box-sizing: border-box;
   border: 2px solid white;
   cursor: pointer;
+  font-family: sans;
+  font-size: .7em;
+}
+
+.buttons {
+  position: relative;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 2px 0px;
+  overflow: hidden;
+  cursor: pointer;
+  border-radius: 10px;
+}
+
+.button {
+  width: 50%;
+  height: 25px;
+}
+
+.buttons:not(:hover)::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 70%;
+    height: 100%;
+    background: linear-gradient(
+        to right,
+        rgba(255, 255, 255, 0) 0%,
+        rgba(255, 255, 255, 0.6) 50%,
+        rgba(255, 255, 255, 0) 100%
+    );
+    transform: skewX(-30deg);
+    animation: shine .8s infinite ease;
+}
+
+@keyframes shine {
+    0% { left: 150%; }
+    100% { left: -150%; }
+}
+
+.message {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: red;
+  font-size: 1.5em;
+  width: var(--width);
+  height: var(--height);
 }

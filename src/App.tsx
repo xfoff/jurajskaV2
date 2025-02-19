@@ -40,6 +40,7 @@ const App: React.FC = () => {
   return (
     <>
       <div className="nav">
+        <div className="arrow right" />
         <ul>
           <li className={current == 0 ? "list active" : "list"} onClick={() => setCurrent(0)}>
             <div>

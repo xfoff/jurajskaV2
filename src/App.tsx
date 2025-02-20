@@ -6,6 +6,9 @@ const App: React.FC = () => {
   const [string, setString] = useState<string>("");
   const [svg, setSvg] = useState<string>("");
   const [current, setCurrent] = useState<number>(0);
+  const [showSearch, setShowSearch] = useState<boolean>(false);
+  const [search, setSearch] = useState<string>("");
+  const [hovered, setHovered] = useState<boolean>(false);
 
   const randomSvg = () => {
     const rand = (count = 1) => Array.from({ length: count }, () => Math.random() * 100);
@@ -26,6 +29,10 @@ const App: React.FC = () => {
     return path;
   }
 
+  const input = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setSearch(event.target.value.replace(/ /g, "+"));
+  };
+
   useEffect(() => {
     const interval = setInterval(() => {
       const randomString = Array.from({ length: 7 }, () => String.fromCharCode(33 + Math.random() * 94)).join('');
@@ -40,7 +47,7 @@ const App: React.FC = () => {
   return (
     <>
       <div className="nav">
-        <div className="arrow right" />
+        <div className="arrow" onClick={() => setShowSearch(!showSearch)} onMouseEnter={() => setHovered(true)}/>
         <ul>
           <li className={current == 0 ? "list active" : "list"} onClick={() => setCurrent(0)}>
             <div>
@@ -103,9 +110,15 @@ const App: React.FC = () => {
           </li>
           <div className="indicator"></div>
         </ul>
+        <div className="pointer" style={{display: hovered ? "none" : "block"}}>
+          <span className="uno"></span>
+          <span className="dos"></span>
+          <span className="tres"></span>
+        </div>
+        <input className="search" type="text" placeholder="search images" style={{transform: `scaleX(${showSearch ? 1 : 0})`}} onChange={input}/>
       </div>
 
-      <Gallery current={current}/>
+      <Gallery current={current} search={search}/>
     </>
   )
 }

@@ -14,6 +14,7 @@
   background: linear-gradient(45deg, #0e9be4, #3d7a52);
   border-radius: 10px;
   padding: 15px 15px 0px 15px;
+  height: 627px;
 }
 
 .images {
@@ -81,8 +82,30 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  color: red;
   font-size: 1.5em;
   width: var(--width);
   height: var(--height);
+}
+
+.fullImg {
+  width: var(--width);
+  height: calc(var(--height) + 13px);
+  border-radius: 10px;
+  margin-bottom: 15px;
+  position: absolute;
+  border: 2px solid white;
+  box-sizing: border-box;
+  background-color: black;
+  transition: .5s;
+  font-family: sans;
+}
+
+.close {
+  position: relative;
+  font-family: sans;
+  font-size: 20px;
+  top: -19px;
+  left: 1000px;
+  cursor: pointer;
+  user-select: none;
 }

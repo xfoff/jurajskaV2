@@ -9,6 +9,7 @@ const App: React.FC = () => {
   const [showSearch, setShowSearch] = useState<boolean>(false);
   const [search, setSearch] = useState<string>("");
   const [hovered, setHovered] = useState<boolean>(false);
+  const [question, setQuestion] = useState<boolean>(false);
 
   const randomSvg = () => {
     const rand = (count = 1) => Array.from({ length: count }, () => Math.random() * 100);
@@ -115,7 +116,15 @@ const App: React.FC = () => {
           <span className="dos"></span>
           <span className="tres"></span>
         </div>
-        <input className="search" type="text" placeholder="search images" style={{transform: `scaleX(${showSearch ? 1 : 0})`}} onChange={input}/>
+        <div className="search" style={{transform: `scaleX(${showSearch ? 1 : 0})`}}>
+          <p className="question" onClick={() => setQuestion(!question)}>?</p>
+          { question ? (
+              <p className="guide">git gud, jk you can type each word to be considered in the search after a space</p>
+            ) : (
+              <input className="searchInput" type="text" placeholder="search images" onChange={input}/>
+            )
+          }
+        </div>
       </div>
 
       <Gallery current={current} search={search}/>

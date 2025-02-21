@@ -15,6 +15,8 @@ const Gallery: React.FC<GalleryProps> = (props) => {
   const options: string[] = ["animals", "landscape", "city", "flower", "void"];
   const [images, setImages] = useState<any[]>([]);
   const [completed, setCompleted] = useState<boolean>(false);
+  const [showImage, setShowImage] = useState<boolean>(false);
+  const [currentFullImage, setCurrentFullImage] = useState<number>(0);
 
   const cssVar = (variable: string): number => {
     const value = getComputedStyle(document.documentElement).getPropertyValue(variable);
@@ -29,6 +31,7 @@ const Gallery: React.FC<GalleryProps> = (props) => {
         const newPage = ((prevPage + by - 1) % allPages + allPages) % allPages + 1;
         setCompleted(false);
         getImages(newPage);
+        console.log(`${newPage} / ${allPages}`)
         return newPage;
       })
     }
@@ -45,35 +48,55 @@ const Gallery: React.FC<GalleryProps> = (props) => {
       }
     })
     .then(response => {
-      setPage(1);
       setImages(response.data.hits);
       setAllPages(Math.round(response.data.totalHits / cardsPerPage));
       setCompleted(true);
+      console.log(response.data.hits);
     })
     .catch(error => console.error(error.message));
   }
 
+  const showFullImage = (i: number) => {
+    setShowImage(true)
+    setCurrentFullImage(i);
+  };
+
   useEffect(() => {
     getImages(page);
+    setPage(1);
   }, [current, search])
+
+  useEffect(() => {
+    document.addEventListener("keydown", (event) => {if (event.key == "Escape") setShowImage(false)})
+    return () => document.removeEventListener("keydown", (event) => {if (event.key == "Escape") setShowImage(false)})
+  }, [])
 
   return (
     <>
       <div className="gallery">
-        <div className={completed && images.length != 0 ? "images" : ""}>
+        <div className={completed && images.length != 0 ? "images" : ""} style={{display: showImage ? "flex" : "grid"}}>
           { images.length == 0 ? (
               <div className="message">No results found for qiven query</div>
+            ) : showImage ? (
+              <>
+                <img className="fullImg" src={images[currentFullImage].largeImageURL} style={{transform: `scale(${showImage ? 1 : 0})`}} alt={images[currentFullImage].pageURL.slice(27).slice(0, -9)}></img>
+                <p className="close" onClick={() => setShowImage(false)}>x</p>
+              </>
             ) : completed ? (
-              images.map((_, i) => <img className="image" key={i} src={_.webformatURL} alt={_.pageURL.replace("https://pixabay.com/photos/", "").slice(0, -9)} onClick={() => console.log(i)}/>)
+              images.map((_, i) => <img className="image" key={i} src={_.webformatURL} alt={_.pageURL.slice(27).slice(0, -9)} onClick={() => showFullImage(i)}/>)
             ) : (
               <div className="message">Loading images</div>
             )
           }
         </div>
-        <div className="buttons">
-          <div className="button" onClick={() => changePage(-1)}></div>
-          <div className="button" onClick={() => changePage(1)}></div>
-        </div>
+        { !showImage && (
+            <div className="buttons">
+              <div className="button" onClick={() => changePage(-1)}></div>
+              <p style={{textWrap: "nowrap"}}>{page} / {allPages}</p>
+              <div className="button" onClick={() => changePage(1)}></div>
+            </div>
+          )
+        }
       </div>
     </>
   )

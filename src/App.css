@@ -178,12 +178,41 @@ body {
   padding: 5px;
   box-sizing: border-box;
   background: linear-gradient(45deg, #0e9be4, #3d7a52);
-  border: none;
-  outline: none;
-  color: white;
-  font-size: .8em;
   transition: .5s;
   transform-origin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.searchInput {
+  all: unset;
+  position: absolute;
+  font-size: .8em;
+  text-align: center;
+}
+
+.question {
+  position: relative;
+  top: -23px;
+  left: 88px;
+  border: 1px solid white;
+  border-radius: 50%;
+  width: 18px;
+  height: 18px;
+  font-size: 21px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  user-select: none;
+}
+
+.guide {
+  position: relative;
+  position: absolute;
+  font-size: .8em;
+  pointer-events: none;
 }
 
 .pointer {
